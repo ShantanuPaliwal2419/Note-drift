@@ -29,3 +29,5 @@ Thumbs.db
 *.log
 .vscode/*
 !.vscode/extensions.json
+
+/demo.mp4.mp4

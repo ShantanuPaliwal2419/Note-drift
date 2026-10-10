@@ -1,0 +1,36 @@
+{
+  "name": "notedrift-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NoteDrift monorepo: Obsidian plugin and web app for time-sensitive note drift detection",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run --prefix apps/web dev",
+    "build:core": "npm run --prefix packages/core build",
+    "build:plugin": "npm run --prefix apps/plugin build",
+    "build:web": "npm run --prefix apps/web build",
+    "build": "npm run build:core && npm run build:plugin && npm run build:web",
+    "test": "vitest run",
+    "lint": "eslint .",
+    "typecheck": "npm run --prefix packages/core typecheck && npm run --prefix apps/plugin typecheck && npm run --prefix apps/web typecheck",
+    "record": "tsx scripts/record-fixtures.ts",
+    "check:secrets": "tsx scripts/check-secrets.ts",
+    "package": "tsx scripts/package-plugin.ts"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.8",
+    "@types/archiver": "^8.0.0",
+    "@types/node": "^22.10.2",
+    "adm-zip": "^0.6.1",
+    "archiver": "^8.0.0",
+    "eslint": "^9.16.0",
+    "prettier": "^3.4.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.71.1",
+    "vitest": "^2.1.8"
+  }
+}

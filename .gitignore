@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Environment and secrets
+.env*
+!.env.example
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+*.tsbuildinfo
+
+# Plugin runtime storage
+data.json
+cache.json
+.obsidian/
+
+# Testing and coverage
+coverage/
+
+# OS and IDE files
+powershell.cmd
+.DS_Store
+Thumbs.db
+*.log
+.vscode/*
+!.vscode/extensions.json

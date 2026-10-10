@@ -1,0 +1,31 @@
+{
+  "name": "notedrift-plugin",
+  "version": "1.0.0",
+  "description": "Obsidian plugin to find and verify time-sensitive note drift using SerpApi",
+  "main": "main.js",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "node esbuild.config.mjs production",
+    "typecheck": "tsc --noEmit -skipLibCheck"
+  },
+  "keywords": [
+    "notedrift",
+    "fact-check",
+    "drift",
+    "version-checker",
+    "serpapi"
+  ],
+  "author": "NoteDrift",
+  "license": "MIT",
+  "dependencies": {
+    "@notedrift/core": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "builtin-modules": "^4.0.0",
+    "esbuild": "^0.24.0",
+    "obsidian": "^1.7.2",
+    "tslib": "^2.8.1",
+    "typescript": "^5.7.2"
+  }
+}

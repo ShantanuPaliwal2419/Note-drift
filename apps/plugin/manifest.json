@@ -1,0 +1,9 @@
+{
+  "id": "notedrift",
+  "name": "NoteDrift",
+  "version": "1.0.0",
+  "minAppVersion": "0.15.0",
+  "description": "Detect time-sensitive drift and outdated software versions in your notes using SerpApi.",
+  "author": "NoteDrift",
+  "isDesktopOnly": false
+}

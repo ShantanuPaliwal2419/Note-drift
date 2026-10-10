@@ -1,0 +1,25 @@
+{
+  "_sample_data": true,
+  "_comment": "SAMPLE DATA: Recorded fixture for fictional library libfoo showing current version 1.5",
+  "search_metadata": {
+    "id": "sample-libfoo-current-002",
+    "status": "Success",
+    "created_at": "2026-10-10 10:42:00 UTC",
+    "processed_at": "2026-10-10 10:42:00 UTC",
+    "total_time_taken": 0.38
+  },
+  "search_parameters": {
+    "engine": "google",
+    "q": "site:libfoo.dev libfoo latest version"
+  },
+  "organic_results": [
+    {
+      "position": 1,
+      "title": "libfoo - Official Documentation",
+      "link": "https://libfoo.dev/docs",
+      "displayed_link": "https://libfoo.dev › docs",
+      "snippet": "The latest stable release of libfoo is version 1.5.0. Install via standard package managers.",
+      "date": "2026-05-10"
+    }
+  ]
+}

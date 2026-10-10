@@ -1,0 +1,19 @@
+{
+  "name": "@notedrift/core",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pure TypeScript core library for NoteDrift drift detection",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "semver": "^7.6.3"
+  },
+  "devDependencies": {
+    "@types/semver": "^7.5.8",
+    "typescript": "^5.7.2"
+  }
+}

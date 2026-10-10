@@ -1,0 +1,33 @@
+{
+  "_sample_data": true,
+  "_comment": "SAMPLE DATA: Recorded fixture for fictional library libfoo showing newer version 2.0",
+  "search_metadata": {
+    "id": "sample-libfoo-outdated-001",
+    "status": "Success",
+    "created_at": "2026-10-10 10:42:00 UTC",
+    "processed_at": "2026-10-10 10:42:00 UTC",
+    "total_time_taken": 0.42
+  },
+  "search_parameters": {
+    "engine": "google",
+    "q": "site:libfoo.dev libfoo release notes"
+  },
+  "organic_results": [
+    {
+      "position": 1,
+      "title": "libfoo docs - Release notes",
+      "link": "https://libfoo.dev/releases",
+      "displayed_link": "https://libfoo.dev › releases",
+      "snippet": "libfoo 2.0 is now released. Upgrading from libfoo 1.5 requires updating your configuration file. Complete changelog for v2.0.0.",
+      "date": "2026-09-15"
+    },
+    {
+      "position": 2,
+      "title": "Blog: moving to libfoo 2",
+      "link": "https://example.com/post",
+      "displayed_link": "https://example.com › post",
+      "snippet": "Our team recently upgraded from libfoo 1.5 to libfoo 2.0. Here are the performance gains we observed.",
+      "date": "2026-08-20"
+    }
+  ]
+}

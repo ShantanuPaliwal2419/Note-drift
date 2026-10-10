@@ -1,0 +1,31 @@
+{
+  "_sample_data": true,
+  "_comment": "SAMPLE DATA: Recorded fixture for dead link rescue candidates",
+  "search_metadata": {
+    "id": "sample-deadlink-rescue-005",
+    "status": "Success",
+    "created_at": "2026-10-10 10:42:00 UTC",
+    "processed_at": "2026-10-10 10:42:00 UTC",
+    "total_time_taken": 0.4
+  },
+  "search_parameters": {
+    "engine": "google",
+    "q": "site:libfoo.dev Getting started guide"
+  },
+  "organic_results": [
+    {
+      "position": 1,
+      "title": "libfoo Getting Started Guide",
+      "link": "https://libfoo.dev/docs/getting-started",
+      "displayed_link": "https://libfoo.dev › docs › getting-started",
+      "snippet": "Official getting started guide for setting up libfoo in your application."
+    },
+    {
+      "position": 2,
+      "title": "Community libfoo Quickstart",
+      "link": "https://example.com/libfoo-guide",
+      "displayed_link": "https://example.com › libfoo-guide",
+      "snippet": "An unofficial community guide for getting started with libfoo."
+    }
+  ]
+}

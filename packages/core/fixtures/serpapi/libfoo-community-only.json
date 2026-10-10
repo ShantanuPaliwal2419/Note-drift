@@ -1,0 +1,33 @@
+{
+  "_sample_data": true,
+  "_comment": "SAMPLE DATA: Recorded fixture with community-only sources showing newer version 2.0 without official confirmation",
+  "search_metadata": {
+    "id": "sample-libfoo-community-003",
+    "status": "Success",
+    "created_at": "2026-10-10 10:42:00 UTC",
+    "processed_at": "2026-10-10 10:42:00 UTC",
+    "total_time_taken": 0.45
+  },
+  "search_parameters": {
+    "engine": "google",
+    "q": "libfoo version announcement"
+  },
+  "organic_results": [
+    {
+      "position": 1,
+      "title": "Community Rumors: libfoo 2.0 on Dev.to",
+      "link": "https://dev.to/community/libfoo-2-preview",
+      "displayed_link": "https://dev.to › community",
+      "snippet": "A community preview mentions libfoo 2.0 might be released next quarter.",
+      "date": "2026-09-01"
+    },
+    {
+      "position": 2,
+      "title": "Reddit discussion: When is libfoo 2 coming?",
+      "link": "https://reddit.com/r/programming/comments/libfoo2",
+      "displayed_link": "https://reddit.com › r › programming",
+      "snippet": "User comments say libfoo 2.0 beta was spotted in experimental branches.",
+      "date": "2026-08-15"
+    }
+  ]
+}

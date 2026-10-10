@@ -1,0 +1,37 @@
+{
+  "_sample_data": true,
+  "_comment": "SAMPLE DATA: Recorded fixture for Google Scholar paper search",
+  "search_metadata": {
+    "id": "sample-scholar-006",
+    "status": "Success",
+    "created_at": "2026-10-10 10:42:00 UTC",
+    "processed_at": "2026-10-10 10:42:00 UTC",
+    "total_time_taken": 0.52
+  },
+  "search_parameters": {
+    "engine": "google_scholar",
+    "q": "Attention Is All You Need Vaswani"
+  },
+  "scholar_results": [
+    {
+      "position": 1,
+      "title": "Attention is all you need",
+      "link": "https://arxiv.org/abs/1706.03762",
+      "snippet": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks...",
+      "publication_info": {
+        "summary": "A Vaswani, N Shazeer, N Parmar, J Uszkoreit... - Advances in neural..., 2017 - neurips.cc",
+        "authors": [
+          { "name": "A Vaswani" },
+          { "name": "N Shazeer" },
+          { "name": "N Parmar" }
+        ]
+      },
+      "inline_links": {
+        "cited_by": {
+          "total": 125000,
+          "link": "https://scholar.google.com/scholar?cites=sample"
+        }
+      }
+    }
+  ]
+}

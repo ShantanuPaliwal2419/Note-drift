@@ -1,0 +1,24 @@
+{
+  "_sample_data": true,
+  "_comment": "SAMPLE DATA: Recorded fixture with no clear version evidence, leading to Can't verify",
+  "search_metadata": {
+    "id": "sample-libfoo-noversion-004",
+    "status": "Success",
+    "created_at": "2026-10-10 10:42:00 UTC",
+    "processed_at": "2026-10-10 10:42:00 UTC",
+    "total_time_taken": 0.35
+  },
+  "search_parameters": {
+    "engine": "google",
+    "q": "libfoo async mode"
+  },
+  "organic_results": [
+    {
+      "position": 1,
+      "title": "libfoo Async Architecture Overview",
+      "link": "https://libfoo.dev/architecture/async",
+      "displayed_link": "https://libfoo.dev › architecture",
+      "snippet": "General overview of the asynchronous event pipeline in libfoo."
+    }
+  ]
+}

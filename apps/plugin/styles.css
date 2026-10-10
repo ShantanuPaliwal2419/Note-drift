@@ -1,0 +1,165 @@
+/* NoteDrift Obsidian Plugin Styles */
+
+.notedrift-view-container {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.notedrift-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--background-modifier-border);
+  padding-bottom: 8px;
+}
+
+.notedrift-title {
+  font-weight: 600;
+  font-size: 1.1em;
+  color: var(--text-normal);
+}
+
+.notedrift-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.notedrift-banner-demo {
+  background-color: var(--background-modifier-form-field);
+  border-left: 3px solid var(--text-warning);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notedrift-note-summary {
+  font-weight: 500;
+  color: var(--text-muted);
+  font-size: 0.9em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.notedrift-evidence-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.notedrift-evidence-card {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  padding: 12px;
+  background-color: var(--background-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.notedrift-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.notedrift-claim-text {
+  font-weight: 500;
+  color: var(--text-normal);
+  font-size: 0.95em;
+  word-break: break-word;
+}
+
+.notedrift-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.notedrift-badge-likely-outdated {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: var(--text-error, #ef4444);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.notedrift-badge-may-be-outdated {
+  background-color: rgba(245, 158, 11, 0.15);
+  color: var(--text-warning, #f59e0b);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.notedrift-badge-looks-current {
+  background-color: rgba(34, 197, 94, 0.15);
+  color: var(--text-success, #22c55e);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.notedrift-badge-cant-verify {
+  background-color: rgba(156, 163, 175, 0.15);
+  color: var(--text-muted, #9ca3af);
+  border: 1px solid rgba(156, 163, 175, 0.3);
+}
+
+.notedrift-explanation {
+  font-size: 0.85em;
+  color: var(--text-muted);
+}
+
+.notedrift-sources {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+  font-size: 0.85em;
+}
+
+.notedrift-source-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px;
+  background-color: var(--background-primary);
+  border-radius: 4px;
+}
+
+.notedrift-source-title {
+  color: var(--text-accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.notedrift-source-meta {
+  color: var(--text-faint);
+  font-size: 0.8em;
+  display: flex;
+  gap: 8px;
+}
+
+.notedrift-card-footer {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--background-modifier-border);
+}
+
+.notedrift-meta-footer {
+  font-size: 0.8em;
+  color: var(--text-faint);
+  border-top: 1px solid var(--background-modifier-border);
+  padding-top: 8px;
+}

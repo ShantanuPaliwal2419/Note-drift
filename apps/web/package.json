@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node -e \"try { require('child_process').execSync('npm run --prefix ../../packages/core build'); } catch(e) {}\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

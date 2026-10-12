@@ -61,6 +61,11 @@ The research platform relies on specifically pinned library versions to maintain
 - High-performance linear algebra and matrix decompositions use numpy 1.22.0 across all risk pricing nodes.
 - Scientific optimization, statistical distribution fitting, and interpolation use scipy 1.8.0.
 - Econometric regression, cointegration testing, and ARIMA time series estimation are handled by statsmodels 0.13.2.
+
+> [!warning] NoteDrift check (2026-10-12)
+> An Official source lists a newer version (0.14.3) than note (0.13.2)
+> Source: https://www.statsmodels.org/stable/release/version0.14.2.html
+> Found via Google web search. Verify before use.
 - Quadratic programming and convex mean-variance optimization pipelines utilize cvxpy 1.2.0 for portfolio constraints.
 - Fixed income yield curve modeling and interest rate swap bootstrapping rely on QuantLib 1.25.
 - Technical indicator calculations and moving-average crossover strategies use TA-Lib 0.4.24.

@@ -16,6 +16,38 @@
 
 ---
 
+## 🎬 Live Demo & Visual Walkthrough
+
+<p align="center">
+  <a href="https://youtu.be/VLMTUf0sM2c" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/YouTube-Watch%20Demo%20Walkthrough-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Watch Demo on YouTube" />
+  </a>
+</p>
+
+> 🎥 **Full Video Demonstration:** Watch the complete live walkthrough of NoteDrift in action on YouTube: **[https://youtu.be/VLMTUf0sM2c](https://youtu.be/VLMTUf0sM2c)**
+
+Experience NoteDrift in action inside Obsidian and the web playground:
+
+### 1. Real-Time Drift Detection in the Side Review Panel
+When you scan a note, NoteDrift extracts time-sensitive dependency versions and temporal statements, compares them against live Google Search results via SerpApi, and displays verdict badges (`Likely Outdated`, `May Be Outdated`, `Looks Current`):
+
+<p align="center">
+  <img src="docs/images/demo-panel.png" alt="NoteDrift Obsidian Review Panel" width="95%" />
+</p>
+
+### 2. Comprehensive Evidence & Official Source Attribution
+Click **Details** on any flagged claim to inspect the retrieved official documentation, release notes, publication dates, and exact version diffs before taking action:
+
+<p align="center">
+  <img src="docs/images/demo-evidence.png" alt="NoteDrift Evidence Card with SerpApi Sources" width="95%" />
+</p>
+
+### 3. Safe Apply: Dated In-Note Callouts (Zero Text Overwrite)
+With a single click on **Apply**, NoteDrift appends a dated warning callout directly beneath the claim with official sources, keeping your original note text **100% byte-identical**:
+
+<p align="center">
+  <img src="docs/images/demo-apply.png" alt="NoteDrift Safe Apply In-Note Callouts" width="95%" />
+</p>
 
 ---
 

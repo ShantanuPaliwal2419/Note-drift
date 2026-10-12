@@ -9,11 +9,13 @@ const IGNORED_DIRS = new Set([
   'build',
   'coverage',
   '.turbo',
-  '.obsidian'
+  '.obsidian',
+  '.quota'
 ]);
 
 const IGNORED_FILES = new Set([
   '.env.example',
+  '.env.local',
   'check-secrets.ts',
   'package-lock.json',
   'yarn.lock',
@@ -45,7 +47,7 @@ function scanDir(dir: string) {
       continue;
     }
 
-    if (IGNORED_FILES.has(entry.name)) {
+    if (IGNORED_FILES.has(entry.name) || (entry.name.startsWith('.env') && !entry.name.endsWith('.example'))) {
       continue;
     }
 

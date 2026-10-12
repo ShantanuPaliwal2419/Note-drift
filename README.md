@@ -16,19 +16,6 @@
 
 ---
 
-## 🎬 Live Product Demo
-
-Watch NoteDrift automatically detect stale quantitative research claims and software dependencies, query SerpApi with site restrictions, and apply safe callouts without altering user text:
-
-<p align="center">
-  <video src="demo.mp4.mp4" controls width="100%" style="max-width: 840px; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.4);" poster="https://img.shields.io/badge/Demo-Click%20To%20Play-blue">
-    Your browser does not support the video tag.
-  </video>
-</p>
-
-<p align="center">
-  <em>Direct Video File: <a href="demo.mp4.mp4"><code>demo.mp4.mp4</code></a> (Full Walkthrough Video Demonstration)</em>
-</p>
 
 ---
 

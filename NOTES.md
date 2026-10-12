@@ -61,4 +61,12 @@
 - Prevented recursive `.drift.md` companion nesting and excluded companion logs from claim extraction.
 - Re-built and packaged all distributables in `dist/` and `sample-vault/.obsidian/plugins/notedrift/main.js`. All 15 Vitest tests and secret scanning pass.
 
+## Milestone 12: Real SerpApi Integration, Atomic 1-Scan Quota & Live Web Playground
+- Integrated server-side `SERPAPI_API_KEY` from `apps/web/.env.local` or environment variables without exposing secrets to client bundles or error messages.
+- Created `apps/web/src/lib/quota.ts` providing persistent, atomic file-backed one-scan reservation (`withLock` + atomic rename), blocking visitors after 1 live search.
+- Updated `apps/web/src/lib/scan.ts` and `apps/web/src/app/api/scan/route.ts` to reserve quota prior to live search, use claim-derived search queries, and disable automatic retries (`maxAttempts: 1`).
+- Enhanced `/try` playground UI with live status indicator, live scan confirmation modal, real vs sample data banners, and 1-scan limit enforcement.
+- Tested: 22/22 Vitest tests passed with mocked HTTP; `npm run typecheck`, `npm run lint`, `npm run build:web`, `npm run check:secrets`, and `npm run package` all passed.
+
+
 

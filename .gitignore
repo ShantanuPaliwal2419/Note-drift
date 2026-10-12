@@ -5,7 +5,10 @@ node_modules/
 
 # Environment and secrets
 .env*
+.env.local
+apps/web/.env.local
 !.env.example
+!apps/web/.env.example
 
 # Build outputs
 dist/
@@ -14,10 +17,14 @@ build/
 out/
 *.tsbuildinfo
 
-# Plugin runtime storage
+# Plugin runtime storage and web quotas
 data.json
 cache.json
 .obsidian/
+.quota/
+apps/web/.quota/
+*.quota.json
+live-quota.json
 
 # Testing and coverage
 coverage/

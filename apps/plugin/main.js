@@ -2137,6 +2137,123 @@ function extractVersionFromText(text) {
 }
 
 // ../../packages/core/dist/extract/claims.js
+var STOP_WORDS = /* @__PURE__ */ new Set([
+  "this",
+  "that",
+  "these",
+  "those",
+  "it",
+  "its",
+  "we",
+  "they",
+  "our",
+  "the",
+  "a",
+  "an",
+  "in",
+  "on",
+  "at",
+  "to",
+  "for",
+  "of",
+  "with",
+  "by",
+  "as",
+  "is",
+  "are",
+  "was",
+  "were",
+  "be",
+  "been",
+  "being",
+  "have",
+  "has",
+  "had",
+  "do",
+  "does",
+  "did",
+  "will",
+  "would",
+  "shall",
+  "should",
+  "can",
+  "could",
+  "may",
+  "might",
+  "must",
+  "and",
+  "but",
+  "or",
+  "so",
+  "yet",
+  "if",
+  "because",
+  "since",
+  "while",
+  "when",
+  "where",
+  "how",
+  "why",
+  "what",
+  "who",
+  "which",
+  "all",
+  "any",
+  "both",
+  "each",
+  "few",
+  "more",
+  "most",
+  "other",
+  "some",
+  "such",
+  "no",
+  "nor",
+  "not",
+  "only",
+  "own",
+  "same",
+  "than",
+  "too",
+  "very",
+  "just"
+]);
+var NON_SOFTWARE_ENTITIES = /* @__PURE__ */ new Set([
+  "step",
+  "chapter",
+  "section",
+  "part",
+  "level",
+  "page",
+  "rule",
+  "item",
+  "rts",
+  "article",
+  "clause",
+  "figure",
+  "table",
+  "autumn",
+  "spring",
+  "summer",
+  "winter",
+  "fall",
+  "january",
+  "february",
+  "march",
+  "april",
+  "may",
+  "june",
+  "july",
+  "august",
+  "september",
+  "october",
+  "november",
+  "december",
+  "equal",
+  "equals",
+  "approx",
+  "approximately"
+]);
 function generateClaimId(notePath, line, text) {
   const str = `${notePath}:${line}:${text.trim()}`;
   let hash = 0;
@@ -2207,7 +2324,10 @@ function extractClaims(markdown, options = {}) {
         const ver = match[2]?.trim();
         if (entity && ver && normalizeVersion(ver)) {
           const lowerEntity = entity.toLowerCase();
-          if (["step", "chapter", "section", "part", "level", "page", "rule", "item"].includes(lowerEntity)) {
+          if (STOP_WORDS.has(lowerEntity) || NON_SOFTWARE_ENTITIES.has(lowerEntity)) {
+            continue;
+          }
+          if (/^(?:19|20)[0-9]{2}$/.test(ver)) {
             continue;
           }
           const claimText = rawLine.trim();
@@ -2231,87 +2351,6 @@ function extractClaims(markdown, options = {}) {
         }
       }
     }
-    const STOP_WORDS = /* @__PURE__ */ new Set([
-      "this",
-      "that",
-      "these",
-      "those",
-      "it",
-      "its",
-      "we",
-      "they",
-      "our",
-      "the",
-      "a",
-      "an",
-      "in",
-      "on",
-      "at",
-      "to",
-      "for",
-      "of",
-      "with",
-      "by",
-      "as",
-      "is",
-      "are",
-      "was",
-      "were",
-      "be",
-      "been",
-      "being",
-      "have",
-      "has",
-      "had",
-      "do",
-      "does",
-      "did",
-      "will",
-      "would",
-      "shall",
-      "should",
-      "can",
-      "could",
-      "may",
-      "might",
-      "must",
-      "and",
-      "but",
-      "or",
-      "so",
-      "yet",
-      "if",
-      "because",
-      "since",
-      "while",
-      "when",
-      "where",
-      "how",
-      "why",
-      "what",
-      "who",
-      "which",
-      "all",
-      "any",
-      "both",
-      "each",
-      "few",
-      "more",
-      "most",
-      "other",
-      "some",
-      "such",
-      "no",
-      "nor",
-      "not",
-      "only",
-      "own",
-      "same",
-      "than",
-      "too",
-      "very",
-      "just"
-    ]);
     for (const kw of rules.temporalKeywords) {
       const kwRegex = new RegExp(`\\b${kw}\\b`, "i");
       if (kwRegex.test(rawLine)) {
@@ -2323,10 +2362,24 @@ function extractClaims(markdown, options = {}) {
         const candidateWords = words.filter((w) => !STOP_WORDS.has(w.toLowerCase()) && w.toLowerCase() !== kw.toLowerCase());
         if (prevClaim && (words.length > 0 && STOP_WORDS.has(words[0].toLowerCase()))) {
           entity = prevClaim.entity;
-        } else if (candidateWords.length > 0 && candidateWords[0]) {
-          entity = candidateWords[0];
-        } else if (prevClaim) {
-          entity = prevClaim.entity;
+        } else {
+          const capWords = [];
+          for (const w of candidateWords) {
+            if (/^[A-Z]/.test(w)) {
+              capWords.push(w);
+              if (capWords.length >= 3)
+                break;
+            } else if (capWords.length > 0) {
+              break;
+            }
+          }
+          if (capWords.length > 0) {
+            entity = capWords.join(" ");
+          } else if (candidateWords.length > 0 && candidateWords[0]) {
+            entity = candidateWords[0];
+          } else if (prevClaim) {
+            entity = prevClaim.entity;
+          }
         }
         if (entity && !STOP_WORDS.has(entity.toLowerCase())) {
           const snoozedUntil = options.snoozedIds?.[id];
@@ -2352,7 +2405,10 @@ function extractClaims(markdown, options = {}) {
       const pRegex = new RegExp(pStr, "g");
       let pMatch;
       while ((pMatch = pRegex.exec(rawLine)) !== null) {
-        const citation = pMatch[1]?.trim();
+        let citation = pMatch[1]?.trim();
+        if (pMatch[2]) {
+          citation = `${pMatch[1]?.trim()} (${pMatch[2].trim()})`;
+        }
         if (citation) {
           const claimText = rawLine.trim();
           const id = generateClaimId(notePath, lineNum, claimText);
@@ -2380,6 +2436,24 @@ var DEFAULT_DOMAIN_MAP = {
   "node.js": "nodejs.org",
   nodejs: "nodejs.org",
   python: "python.org",
+  pandas: "pandas.pydata.org",
+  numpy: "numpy.org",
+  scipy: "scipy.org",
+  quantlib: "quantlib.org",
+  statsmodels: "statsmodels.org",
+  yfinance: "pypi.org",
+  polars: "pola.rs",
+  "scikit-learn": "scikit-learn.org",
+  pytorch: "pytorch.org",
+  cvxpy: "cvxpy.org",
+  "ta-lib": "ta-lib.org",
+  talib: "ta-lib.org",
+  "european central bank": "ecb.europa.eu",
+  ecb: "ecb.europa.eu",
+  "federal reserve": "federalreserve.gov",
+  sec: "sec.gov",
+  imf: "imf.org",
+  "world bank": "worldbank.org",
   nextjs: "nextjs.org",
   "next.js": "nextjs.org",
   vue: "vuejs.org",
@@ -2436,6 +2510,19 @@ function planQueriesForClaims(claims, officialDomainsMap) {
       continue;
     }
     const domain = domainMap[rawEntity.toLowerCase()];
+    if (claim.type === "temporal") {
+      const q = domain ? `site:${domain} ${rawEntity} latest updates` : `${rawEntity} latest updates`;
+      const qKey = `google:${q.toLowerCase()}`;
+      if (!seenQueries.has(qKey)) {
+        seenQueries.add(qKey);
+        planned.push({
+          claimId: claim.id,
+          engine: "google",
+          query: q
+        });
+      }
+      continue;
+    }
     let primaryQ;
     if (domain) {
       primaryQ = `site:${domain} ${rawEntity} release notes`;
@@ -2577,6 +2664,32 @@ function determineVerdict(claim, evidenceList) {
     return {
       verdict: "Can't verify",
       reasons: ["No search results returned for query"]
+    };
+  }
+  if (claim.type === "paper") {
+    const scholarSources = evidenceList.filter((e) => e.citationCount !== void 0 || e.authors);
+    if (scholarSources.length > 0) {
+      const top = scholarSources[0];
+      const citeText = top.citationCount !== void 0 ? ` (${top.citationCount} citations)` : "";
+      return {
+        verdict: "Looks current",
+        reasons: [
+          `Scholar verified: "${top.title}"${citeText}. Academic citation found on Google Scholar. Verify paper before use.`
+        ]
+      };
+    }
+    if (evidenceList.length > 0) {
+      const top = evidenceList[0];
+      return {
+        verdict: "Looks current",
+        reasons: [
+          `Found academic record: "${top.title}". Verify paper status before use.`
+        ]
+      };
+    }
+    return {
+      verdict: "Can't verify",
+      reasons: ["No matching academic paper found on Google Scholar"]
     };
   }
   if (!claim.version) {
@@ -3017,12 +3130,14 @@ var SerpApiClient = class {
   cache;
   budget;
   demoMode;
+  maxAttempts;
   constructor(options = {}) {
     this.apiKey = options.apiKey ?? "";
     this.httpFetch = options.httpFetch;
     this.cache = options.cache ?? new SerpApiCache();
     this.budget = options.budget ?? new BudgetManager();
     this.demoMode = options.demoMode ?? false;
+    this.maxAttempts = options.maxAttempts ?? 2;
   }
   setApiKey(key) {
     this.apiKey = key;
@@ -3071,8 +3186,16 @@ var SerpApiClient = class {
     if (params.hl)
       url.searchParams.set("hl", params.hl);
     let attempts = 0;
-    const maxAttempts = 2;
+    const maxAttempts = Math.max(1, this.maxAttempts);
     let lastError = null;
+    const sanitizeErr = (err) => {
+      let msg = String(err?.message || err || "Unknown error");
+      if (this.apiKey && this.apiKey.length > 5) {
+        msg = msg.split(this.apiKey).join("[REDACTED]");
+      }
+      msg = msg.replace(/api_key=[a-zA-Z0-9_\-]+/gi, "api_key=[REDACTED]");
+      return new Error(msg);
+    };
     while (attempts < maxAttempts) {
       attempts++;
       try {
@@ -3083,7 +3206,7 @@ var SerpApiClient = class {
           }
         });
         if (res.status === 401) {
-          throw new Error("SerpApi key rejected (401). Open settings.");
+          throw new Error("SerpApi key rejected (401). Please verify your SERPAPI_API_KEY in apps/web/.env.local.");
         }
         if (res.status === 429) {
           throw new Error("Rate limit reached (429). Please wait before trying again.");
@@ -3103,9 +3226,10 @@ var SerpApiClient = class {
         await this.cache.set(params.engine, params.q, json);
         return { response: json, isLive: true };
       } catch (err) {
-        lastError = err;
-        if (err.message?.includes("401") || err.message?.includes("429")) {
-          throw err;
+        const safeError = sanitizeErr(err);
+        lastError = safeError;
+        if (safeError.message.includes("401") || safeError.message.includes("429")) {
+          throw safeError;
         }
       }
     }

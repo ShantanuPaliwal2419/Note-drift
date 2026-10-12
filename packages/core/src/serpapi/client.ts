@@ -13,6 +13,7 @@ export interface SerpApiClientOptions {
   cache?: SerpApiCache;
   budget?: BudgetManager;
   demoMode?: boolean;
+  maxAttempts?: number;
 }
 
 export class SerpApiClient {
@@ -21,6 +22,7 @@ export class SerpApiClient {
   private cache: SerpApiCache;
   private budget: BudgetManager;
   private demoMode: boolean;
+  private maxAttempts: number;
 
   constructor(options: SerpApiClientOptions = {}) {
     this.apiKey = options.apiKey ?? '';
@@ -28,6 +30,7 @@ export class SerpApiClient {
     this.cache = options.cache ?? new SerpApiCache();
     this.budget = options.budget ?? new BudgetManager();
     this.demoMode = options.demoMode ?? false;
+    this.maxAttempts = options.maxAttempts ?? 2;
   }
 
   public setApiKey(key: string): void {
@@ -87,10 +90,19 @@ export class SerpApiClient {
     if (params.gl) url.searchParams.set('gl', params.gl);
     if (params.hl) url.searchParams.set('hl', params.hl);
 
-    // 7. Execute request with limited retry for 5xx errors
+    // 7. Execute request with limited retry for 5xx errors (disabled when maxAttempts === 1)
     let attempts = 0;
-    const maxAttempts = 2;
+    const maxAttempts = Math.max(1, this.maxAttempts);
     let lastError: Error | null = null;
+
+    const sanitizeErr = (err: any): Error => {
+      let msg = String(err?.message || err || 'Unknown error');
+      if (this.apiKey && this.apiKey.length > 5) {
+        msg = msg.split(this.apiKey).join('[REDACTED]');
+      }
+      msg = msg.replace(/api_key=[a-zA-Z0-9_\-]+/gi, 'api_key=[REDACTED]');
+      return new Error(msg);
+    };
 
     while (attempts < maxAttempts) {
       attempts++;
@@ -103,7 +115,7 @@ export class SerpApiClient {
         });
 
         if (res.status === 401) {
-          throw new Error('SerpApi key rejected (401). Open settings.');
+          throw new Error('SerpApi key rejected (401). Please verify your SERPAPI_API_KEY in apps/web/.env.local.');
         }
 
         if (res.status === 429) {
@@ -130,9 +142,10 @@ export class SerpApiClient {
 
         return { response: json, isLive: true };
       } catch (err: any) {
-        lastError = err;
-        if (err.message?.includes('401') || err.message?.includes('429')) {
-          throw err;
+        const safeError = sanitizeErr(err);
+        lastError = safeError;
+        if (safeError.message.includes('401') || safeError.message.includes('429')) {
+          throw safeError;
         }
       }
     }

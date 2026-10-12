@@ -133,6 +133,22 @@ function runPackaging() {
   console.log(`Web download copy 1: ${path.join(WEB_DOWNLOADS_DIR, 'notedrift-plugin.zip')}`);
   console.log(`Web download copy 2: ${path.join(WEB_DOWNLOADS_DIR, 'notedrift-sample-vault.zip')}`);
 
+  // Strict check: verify no .env or .env.local files in either ZIP archive
+  function verifyNoEnvInZip(zipPath: string, zipName: string) {
+    const zip = new AdmZip(zipPath);
+    for (const entry of zip.getEntries()) {
+      const lower = entry.entryName.toLowerCase();
+      if (lower.includes('.env')) {
+        console.error(`SECURITY ERROR: Distributable ${zipName} contains prohibited env file: ${entry.entryName}`);
+        process.exit(1);
+      }
+    }
+    console.log(`Verified ${zipName}: 0 env/secret files present.`);
+  }
+
+  verifyNoEnvInZip(pluginZipPath, 'notedrift-plugin.zip');
+  verifyNoEnvInZip(sampleVaultZipPath, 'notedrift-sample-vault.zip');
+
   // Run secret check on dist
   console.log('\nRunning secret check on build outputs...');
   execSync('npm run check:secrets', { stdio: 'inherit', cwd: ROOT_DIR });

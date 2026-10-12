@@ -7,6 +7,8 @@ export default tseslint.config(
       'node_modules/**',
       'apps/web/.next/**',
       'apps/plugin/main.js',
+      'sample-vault/**',
+      '**/.obsidian/**',
       'coverage/**',
       '**/*.d.ts',
       'powershell.cmd'
